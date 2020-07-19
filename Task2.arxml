@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AUTOSAR xmlns="http://autosar.org/schema/r4.0">
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 http://autosar.org/schema/r4.0/autosar40/swc/components">
   <AR-PACKAGES>
     <AR-PACKAGE UUID="accb4de3-5576-45d1-9481-b1d3a9763dd1">
       <SHORT-NAME>BaseTypes</SHORT-NAME>
@@ -80,6 +80,30 @@
     <AR-PACKAGE UUID="5f8fba83-1f2a-4e31-968d-7bbd22ab1095">
       <SHORT-NAME>ImplDataTypes</SHORT-NAME>
       <ELEMENTS>
+        <IMPLEMENTATION-DATA-TYPE UUID="86bf0ddb-3402-4388-b59c-de2d346257f6">
+          <SHORT-NAME>IoPositionSensorReadingType</SHORT-NAME>
+          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+          <TYPE-EMITTER>RTE</TYPE-EMITTER>
+        </IMPLEMENTATION-DATA-TYPE>
+        <IMPLEMENTATION-DATA-TYPE UUID="48e8f1c2-aa02-4246-9e0b-ceb6d639e2f5">
+          <SHORT-NAME>IoWeightSensorReadingType</SHORT-NAME>
+          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/uint16</IMPLEMENTATION-DATA-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+          <TYPE-EMITTER>RTE</TYPE-EMITTER>
+        </IMPLEMENTATION-DATA-TYPE>
         <IMPLEMENTATION-DATA-TYPE UUID="b274f57f-cadb-4371-85f4-b696b2b6b402">
           <SHORT-NAME>MultiStateBtn</SHORT-NAME>
           <CATEGORY>TYPE_REFERENCE</CATEGORY>
@@ -264,6 +288,64 @@
         <AR-PACKAGE UUID="d67312ec-5aa4-4648-8253-9337319434d1">
           <SHORT-NAME>ClientServer</SHORT-NAME>
           <ELEMENTS>
+            <CLIENT-SERVER-INTERFACE UUID="5bc09f3b-4049-4b2b-9c5f-dcdccdd6e7e6">
+              <SHORT-NAME>CsIf_IoGetSensorPosition</SHORT-NAME>
+              <IS-SERVICE>false</IS-SERVICE>
+              <OPERATIONS>
+                <CLIENT-SERVER-OPERATION UUID="e0c35e33-55a0-439b-985b-91e88e99927a">
+                  <SHORT-NAME>IOGet</SHORT-NAME>
+                  <ARGUMENTS>
+                    <ARGUMENT-DATA-PROTOTYPE UUID="4df673db-de7b-46af-9705-126a890eaac8">
+                      <SHORT-NAME>position</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/IoPositionSensorReadingType</TYPE-TREF>
+                      <DIRECTION>INOUT</DIRECTION>
+                    </ARGUMENT-DATA-PROTOTYPE>
+                  </ARGUMENTS>
+                </CLIENT-SERVER-OPERATION>
+              </OPERATIONS>
+            </CLIENT-SERVER-INTERFACE>
+            <CLIENT-SERVER-INTERFACE UUID="6c8e46c7-f93a-4a0a-9961-ba63fc10f66f">
+              <SHORT-NAME>CsIf_IoGetSensorWeight</SHORT-NAME>
+              <IS-SERVICE>false</IS-SERVICE>
+              <OPERATIONS>
+                <CLIENT-SERVER-OPERATION UUID="263a7351-707c-4903-82bf-91000068f399">
+                  <SHORT-NAME>IOGet</SHORT-NAME>
+                  <ARGUMENTS>
+                    <ARGUMENT-DATA-PROTOTYPE UUID="7b1a63e0-081b-40f6-a38a-48dd43c0aa41">
+                      <SHORT-NAME>weight</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/IoWeightSensorReadingType</TYPE-TREF>
+                      <DIRECTION>INOUT</DIRECTION>
+                    </ARGUMENT-DATA-PROTOTYPE>
+                  </ARGUMENTS>
+                </CLIENT-SERVER-OPERATION>
+              </OPERATIONS>
+            </CLIENT-SERVER-INTERFACE>
+            <CLIENT-SERVER-INTERFACE UUID="7fa7ea13-6188-4f1c-8b20-f6ac59761d14">
+              <SHORT-NAME>CsIf_IoSetMotor</SHORT-NAME>
+              <IS-SERVICE>false</IS-SERVICE>
+              <OPERATIONS>
+                <CLIENT-SERVER-OPERATION UUID="5ecb93d7-88cb-494f-aad2-aa2a20c502bf">
+                  <SHORT-NAME>IOSetForward</SHORT-NAME>
+                  <ARGUMENTS>
+                    <ARGUMENT-DATA-PROTOTYPE UUID="97b1a68c-6cd2-4e23-a8e0-00e8eb72368f">
+                      <SHORT-NAME>Arg_</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/void</TYPE-TREF>
+                      <DIRECTION>IN</DIRECTION>
+                    </ARGUMENT-DATA-PROTOTYPE>
+                  </ARGUMENTS>
+                </CLIENT-SERVER-OPERATION>
+                <CLIENT-SERVER-OPERATION UUID="4e298f71-c4c9-4a20-abd5-5d45b931c10e">
+                  <SHORT-NAME>IOSetReverse</SHORT-NAME>
+                  <ARGUMENTS>
+                    <ARGUMENT-DATA-PROTOTYPE UUID="392b60c1-c8e1-4a7c-8b5a-7d9b1de0f2b0">
+                      <SHORT-NAME>Arg_</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/void</TYPE-TREF>
+                      <DIRECTION>IN</DIRECTION>
+                    </ARGUMENT-DATA-PROTOTYPE>
+                  </ARGUMENTS>
+                </CLIENT-SERVER-OPERATION>
+              </OPERATIONS>
+            </CLIENT-SERVER-INTERFACE>
             <CLIENT-SERVER-INTERFACE UUID="ae28c845-67ee-4437-9689-b35a4102e19e">
               <SHORT-NAME>CsIf_PositionSensor</SHORT-NAME>
               <IS-SERVICE>false</IS-SERVICE>
@@ -485,6 +567,10 @@
               <SHORT-NAME>ppHeightMotor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_StepMotor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="24d1b280-c7f1-4f1a-8d61-2eb71fda7c8d">
+              <SHORT-NAME>rpIOSetHeight</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="105ceba7-1f60-4f74-911a-02c8ca500db4">
@@ -508,6 +594,24 @@
                   <SHORT-NAME>HeightMotor_Move</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="26ec70f0-56d5-4314-83db-2e6803249cda">
+                      <SHORT-NAME>SCP_rpIOSetHeight_IOSetForward</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/HeightMotor/rpIOSetHeight</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="302e048f-4b8b-47f8-a6da-a4a4403d6246">
+                      <SHORT-NAME>SCP_rpIOSetHeight_IOSetReverse</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/HeightMotor/rpIOSetHeight</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>HeightMotor_Move</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
@@ -522,6 +626,10 @@
               <SHORT-NAME>ppHeightSensor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_PositionSensor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="ddb31428-4e4e-4edd-ae29-d6f36d2f9acd">
+              <SHORT-NAME>rpIOGetHeight</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="93cdefa4-cba1-46d9-978c-7add8cd1d1c6">
@@ -545,6 +653,16 @@
                   <SHORT-NAME>HeightSensor_GetPosition</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="f29d4703-32ba-498d-926b-0ad50b374caa">
+                      <SHORT-NAME>SCP_rpIOGetHeight_IOGet</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/HeightSensor/rpIOGetHeight</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>HeightSensor_GetPosition</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
@@ -678,6 +796,27 @@
           <VENDOR-ID>255</VENDOR-ID>
           <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/SoftwareComponents/InclineSensor/Ibhv_InclineSensor</BEHAVIOR-REF>
         </SWC-IMPLEMENTATION>
+        <SWC-IMPLEMENTATION UUID="6c3b11cd-752e-4cd5-8d5f-94277252c8cc">
+          <SHORT-NAME>Impl_IoHwAbs</SHORT-NAME>
+          <CODE-DESCRIPTORS>
+            <CODE UUID="347e3ba0-ad80-4c1a-8a79-2885e8eb4525">
+              <SHORT-NAME>Code</SHORT-NAME>
+              <ARTIFACT-DESCRIPTORS>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>SWC.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+              </ARTIFACT-DESCRIPTORS>
+            </CODE>
+          </CODE-DESCRIPTORS>
+          <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+          <RESOURCE-CONSUMPTION UUID="8b2b9d20-a262-405f-ad09-3e316b27aa86">
+            <SHORT-NAME>ResourceConsumption</SHORT-NAME>
+          </RESOURCE-CONSUMPTION>
+          <SW-VERSION>1.0.0</SW-VERSION>
+          <VENDOR-ID>255</VENDOR-ID>
+          <BEHAVIOR-REF DEST="SWC-INTERNAL-BEHAVIOR">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs</BEHAVIOR-REF>
+        </SWC-IMPLEMENTATION>
         <SWC-IMPLEMENTATION UUID="2ed97fa6-8d18-476f-b567-3c7c15fcf890">
           <SHORT-NAME>Impl_Seat_Manager</SHORT-NAME>
           <CODE-DESCRIPTORS>
@@ -769,6 +908,10 @@
               <SHORT-NAME>ppInclineMotor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_StepMotor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="3fdcab32-82c0-45bc-ab43-d1ba288aa32f">
+              <SHORT-NAME>rpIOSetIncline</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="aedb7b11-e4e7-4c3e-9348-4c1926d89a63">
@@ -792,6 +935,24 @@
                   <SHORT-NAME>InclineMotor_Move</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="72353be8-ac70-4960-b615-83230af4f148">
+                      <SHORT-NAME>SCP_rpIOSetIncline_IOSetForward</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/InclineMotor/rpIOSetIncline</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="1554d84a-994d-433d-ab22-7fc0e9fe66c4">
+                      <SHORT-NAME>SCP_rpIOSetIncline_IOSetReverse</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/InclineMotor/rpIOSetIncline</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>InclineMotor_Move</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
@@ -806,6 +967,10 @@
               <SHORT-NAME>ppInclineSensor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_PositionSensor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="5180ae1b-dc1f-43a7-a8f5-cddfad131880">
+              <SHORT-NAME>rpIOGetIncline</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="2e54b7d1-c24a-4a33-a8f9-7b6813ccc97d">
@@ -829,7 +994,204 @@
                   <SHORT-NAME>InclineSensor_GetPosition</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="1f6524c6-e57a-41ba-a033-11e7dc7e535a">
+                      <SHORT-NAME>SCP_rpIOGetIncline_IOGet</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/InclineSensor/rpIOGetIncline</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>InclineSensor_GetPosition</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+              <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+        <APPLICATION-SW-COMPONENT-TYPE UUID="d08126b0-5926-42ec-aab7-2d36e1ee0e17">
+          <SHORT-NAME>IoHwAbs</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE UUID="e9b4021c-c976-46d9-8a56-552a71192f0b">
+              <SHORT-NAME>ppIOGetHeight</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="1a9e20a4-cbc1-4e52-97de-1992dc2078e7">
+              <SHORT-NAME>ppIOGetIncline</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="f0ff05cf-1b8b-4dd5-8bea-dd5853030780">
+              <SHORT-NAME>ppIOGetSlide</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="2d48e60d-09e6-4210-a5d2-1e389646ac82">
+              <SHORT-NAME>ppIOGetWeight</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorWeight</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="20d2652c-d52f-4b79-8f6f-7cc846c5f6f4">
+              <SHORT-NAME>ppIOSetHeight</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="245372b8-1619-470d-8b7e-b20f58a3851c">
+              <SHORT-NAME>ppIOSetIncline</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="d1545b92-7760-465f-a7ff-e0900c2fee0d">
+              <SHORT-NAME>ppIOSetSlide</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR UUID="89e686b3-8da3-43f2-8878-311baa10b5e9">
+              <SHORT-NAME>Ibhv_IoHwAbs</SHORT-NAME>
+              <DATA-TYPE-MAPPING-REFS>
+                <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/MappingSets/MappingSet</DATA-TYPE-MAPPING-REF>
+              </DATA-TYPE-MAPPING-REFS>
+              <EVENTS>
+                <OPERATION-INVOKED-EVENT UUID="5da67444-b527-4ac4-8d67-3c47f1e6813f">
+                  <SHORT-NAME>OIE_ppIOGetHeight_IOGet</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IoHwAbs_ECUGet_Height</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOGetHeight</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="73e34a5a-d241-49b1-b1f5-afb61b592660">
+                  <SHORT-NAME>OIE_ppIOGetIncline_IOGet</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IoHwAbs_ECUGet_Incline</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOGetIncline</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="69468dbd-8456-4f13-b6f7-cf20e451861a">
+                  <SHORT-NAME>OIE_ppIOGetSlide_IOGet</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IoHwAbs_ECUGet_Slide</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOGetSlide</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="0253ad2c-a8c1-427e-b814-4096d096463c">
+                  <SHORT-NAME>OIE_ppIOGetWeight_IOGet</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IoHwAbs_ECUGet_Weight</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOGetWeight</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorWeight/IOGet</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="9f2b6fcf-dd90-4171-8410-28a1684bc2ee">
+                  <SHORT-NAME>OIE_ppIOSetHeight_IOSetForward</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetForward_Height</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetHeight</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="09bf8576-16f4-42b4-bbfb-9077de1e75f3">
+                  <SHORT-NAME>OIE_ppIOSetHeight_IOSetReverse</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetReverse_Height</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetHeight</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="5750a96b-3110-4baa-8b3c-f2525e31c88f">
+                  <SHORT-NAME>OIE_ppIOSetIncline_IOSetForward</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetForward_Incline</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetIncline</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="11e997ad-50b0-412d-83da-ea5b272db3be">
+                  <SHORT-NAME>OIE_ppIOSetIncline_IOSetReverse</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetReverse_Incline</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetIncline</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="5f88e347-c55e-468d-9e9e-a0bcb7bd4d8e">
+                  <SHORT-NAME>OIE_ppIOSetSlide_IOSetForward</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetForward_Slide</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetSlide</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+                <OPERATION-INVOKED-EVENT UUID="856caee5-4001-45ad-9d73-970fb1d67a00">
+                  <SHORT-NAME>OIE_ppIOSetSlide_IOSetReverse</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/IoHwAbs/Ibhv_IoHwAbs/IO_HwAbs_ECUSetReverse_Slide</START-ON-EVENT-REF>
+                  <OPERATION-IREF>
+                    <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/IoHwAbs/ppIOSetSlide</CONTEXT-P-PORT-REF>
+                    <TARGET-PROVIDED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-PROVIDED-OPERATION-REF>
+                  </OPERATION-IREF>
+                </OPERATION-INVOKED-EVENT>
+              </EVENTS>
+              <HANDLE-TERMINATION-AND-RESTART>NO-SUPPORT</HANDLE-TERMINATION-AND-RESTART>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY UUID="a2ae9a79-aca4-47d2-b352-bd6fa3ae532e">
+                  <SHORT-NAME>IO_HwAbs_ECUSetForward_Height</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetForward_Height</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="ece87472-bdbc-4919-8811-dcc9c924e8cb">
+                  <SHORT-NAME>IO_HwAbs_ECUSetForward_Incline</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetForward_Incline</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="ce562eff-a110-4362-b6e5-25219b6d64b2">
+                  <SHORT-NAME>IO_HwAbs_ECUSetForward_Slide</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetForward_Slide</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="b6ae57b1-3e4e-4a49-af64-684f36d3f5b3">
+                  <SHORT-NAME>IO_HwAbs_ECUSetReverse_Height</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetReverse_Height</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="1b0adf4e-765c-4a87-954a-424620fa2e14">
+                  <SHORT-NAME>IO_HwAbs_ECUSetReverse_Incline</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetReverse_Incline</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="ca07da7c-08d7-46a7-b568-0796db4e99ab">
+                  <SHORT-NAME>IO_HwAbs_ECUSetReverse_Slide</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IO_HwAbs_ECUSetReverse_Slide</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="f926679f-90a4-4351-aa76-9366f9ad4fab">
+                  <SHORT-NAME>IoHwAbs_ECUGet_Height</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IoHwAbs_ECUGet_Height</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="ab22733f-de58-44fb-9f61-0549c51280ff">
+                  <SHORT-NAME>IoHwAbs_ECUGet_Incline</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IoHwAbs_ECUGet_Incline</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="21ed8e50-cd90-4f3a-92ba-87440af4abc0">
+                  <SHORT-NAME>IoHwAbs_ECUGet_Slide</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IoHwAbs_ECUGet_Slide</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="cfdda97b-83cd-4d37-9522-0ce7deb01a33">
+                  <SHORT-NAME>IoHwAbs_ECUGet_Weight</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SYMBOL>IoHwAbs_ECUGet_Weight</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
               <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
@@ -1110,6 +1472,10 @@
               <SHORT-NAME>ppSlideMotor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_StepMotor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="28a79003-50e9-4aff-8858-fb32e9ed9308">
+              <SHORT-NAME>rpIOSetSlide</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoSetMotor</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="7cf5c3f6-8234-420f-9be5-297235720aed">
@@ -1133,6 +1499,24 @@
                   <SHORT-NAME>SlideMotor_Move</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="07f9ce95-b451-455c-bde0-4bc206c77c19">
+                      <SHORT-NAME>SCP_rpIOSetSlide_IOSetForward</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/SlideMotor/rpIOSetSlide</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetForward</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="e9c6eb45-0af6-4f85-80e1-a056746480a3">
+                      <SHORT-NAME>SCP_rpIOSetSlide_IOSetReverse</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/SlideMotor/rpIOSetSlide</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoSetMotor/IOSetReverse</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>SlideMotor_Move</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
@@ -1147,6 +1531,10 @@
               <SHORT-NAME>ppSlideSensor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_PositionSensor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="298f4228-cba6-40dc-a68a-2d067bb87d16">
+              <SHORT-NAME>rpIOGetSlide</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="7c415d11-07ed-448f-b36e-5ff156b75006">
@@ -1170,6 +1558,16 @@
                   <SHORT-NAME>SlideSensor_GetPosition</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="d146d796-f9c5-477d-b50e-3c3dccd0a5ac">
+                      <SHORT-NAME>SCP_rpIOGetSlide_IOGet</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/SlideSensor/rpIOGetSlide</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorPosition/IOGet</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>SlideSensor_GetPosition</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
@@ -1184,6 +1582,10 @@
               <SHORT-NAME>ppWeightSensor</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_WeightSensor</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="6420b139-f339-40b3-a617-fc89addb8dec">
+              <SHORT-NAME>rpIOGetWeight</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/PortInterfaces/ClientServer/CsIf_IoGetSensorWeight</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="b6187291-e86e-41cd-9a67-f164d67b1189">
@@ -1207,6 +1609,16 @@
                   <SHORT-NAME>WeightSensor_GetWeight</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="80515be3-def4-4e65-9ddb-3c892fbd1448">
+                      <SHORT-NAME>SCP_rpIOGetWeight_IOGet</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/WeightSensor/rpIOGetWeight</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/PortInterfaces/ClientServer/CsIf_IoGetSensorWeight/IOGet</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                      <TIMEOUT>0.0</TIMEOUT>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                   <SYMBOL>WeightSensor_GetWeight</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>

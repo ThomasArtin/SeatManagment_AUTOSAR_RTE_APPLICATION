@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: HeightSensor
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 7/19/2020 04:10 PM
+ * Generated on 7/19/2020 06:17 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -25,6 +25,10 @@
 void HeightSensor_GetPosition (SensorPositionType* position)
 {
 	Std_ReturnType status;
+	IoPositionSensorReadingType position;
 
+	/* Server Call Points */
+	status = Rte_Call_rpIOGetHeight_IOGet(&position);
+	
 }
 
