@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 http://autosar.org/schema/r4.0/autosar40/swc/components">
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0">
   <AR-PACKAGES>
     <AR-PACKAGE UUID="accb4de3-5576-45d1-9481-b1d3a9763dd1">
       <SHORT-NAME>BaseTypes</SHORT-NAME>
@@ -326,23 +326,9 @@
               <OPERATIONS>
                 <CLIENT-SERVER-OPERATION UUID="5ecb93d7-88cb-494f-aad2-aa2a20c502bf">
                   <SHORT-NAME>IOSetForward</SHORT-NAME>
-                  <ARGUMENTS>
-                    <ARGUMENT-DATA-PROTOTYPE UUID="97b1a68c-6cd2-4e23-a8e0-00e8eb72368f">
-                      <SHORT-NAME>Arg_</SHORT-NAME>
-                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/void</TYPE-TREF>
-                      <DIRECTION>IN</DIRECTION>
-                    </ARGUMENT-DATA-PROTOTYPE>
-                  </ARGUMENTS>
                 </CLIENT-SERVER-OPERATION>
                 <CLIENT-SERVER-OPERATION UUID="4e298f71-c4c9-4a20-abd5-5d45b931c10e">
                   <SHORT-NAME>IOSetReverse</SHORT-NAME>
-                  <ARGUMENTS>
-                    <ARGUMENT-DATA-PROTOTYPE UUID="392b60c1-c8e1-4a7c-8b5a-7d9b1de0f2b0">
-                      <SHORT-NAME>Arg_</SHORT-NAME>
-                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/void</TYPE-TREF>
-                      <DIRECTION>IN</DIRECTION>
-                    </ARGUMENT-DATA-PROTOTYPE>
-                  </ARGUMENTS>
                 </CLIENT-SERVER-OPERATION>
               </OPERATIONS>
             </CLIENT-SERVER-INTERFACE>

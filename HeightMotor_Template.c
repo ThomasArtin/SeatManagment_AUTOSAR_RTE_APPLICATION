@@ -4,7 +4,7 @@
  * \brief Rte Component Template for AUTOSAR SWC: HeightMotor
  *
  * \author Sprints AUTOSAR Authoring Tool (SAAT) v1.0.2
- * Generated on 7/19/2020 06:16 PM
+ * Generated on 7/19/2020 06:35 PM
  *
  * For any inquiries: hassan.m.farahat@gmail.com
  *
@@ -25,12 +25,18 @@
 void HeightMotor_Move (StepMotorStepType step)
 {
 	Std_ReturnType status;
-	void Arg_;
-	void Arg_0;
 
 	/* Server Call Points */
-	status = Rte_Call_rpIOSetHeight_IOSetForward(Arg_);
-	status = Rte_Call_rpIOSetHeight_IOSetReverse(Arg_0);
+	if (step == MOTOR_STEP_MINUS)
+	{
+		(void)Rte_Call_rpIOSetHeight_IOSetForward();
+	}
+	else if (step == MOTOR_STEP_PLUS)
+	{
+		(void)Rte_Call_rpIOSetHeight_IOSetReverse();
+	}
+	
+	
 	
 }
 

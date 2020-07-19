@@ -11,7 +11,13 @@
  */
 
 #include "Rte_SlideSensor.h"
-
+static void GetPosition (SensorPositionType* position)
+{
+	if (position == 0) position = SENSOR_POSITION_STEP_0;
+	else if (position > 0 && position <= 64) position = SENSOR_POSITION_STEP_1;
+	else if (position > 64 && position <= 192) position = SENSOR_POSITION_STEP_2;
+	else if (position > 192 && position <= 255) position = SENSOR_POSITION_STEP_3;
+}
 
 /**
  *
@@ -29,6 +35,6 @@ void SlideSensor_GetPosition (SensorPositionType* position)
 
 	/* Server Call Points */
 	status = Rte_Call_rpIOGetSlide_IOGet(&position);
-	
+	GetPosition(&position);
 }
 

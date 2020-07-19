@@ -12,6 +12,10 @@
 
 #include "Rte_WeightSensor.h"
 
+static void GetWeight (SensorWeightType* weight)
+{
+	weight/= 1000;
+}
 
 /**
  *
@@ -29,6 +33,6 @@ void WeightSensor_GetWeight (SensorWeightType* weight)
 
 	/* Server Call Points */
 	status = Rte_Call_rpIOGetWeight_IOGet(&weight);
-	
+	GetWeight(&weight);
 }
 
