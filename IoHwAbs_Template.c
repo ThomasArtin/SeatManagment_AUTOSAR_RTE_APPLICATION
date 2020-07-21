@@ -12,6 +12,15 @@
 
 #include "Rte_IoHwAbs.h"
 
+/*for weight sensor*/
+#include "Spi.h"
+
+/*for position sensors*/
+#include "Adc.h"
+
+/*for driving the position motors*/
+#include "Dio.h"
+
 
 /**
  *
@@ -21,10 +30,10 @@
  *  - OperationInvokedEventImpl.OIE_ppIOSetHeight_IOSetForward
  *
  */
-
-void IO_HwAbs_ECUSetForward_Height (void Arg_)
+void IO_HwAbs_ECUSetForward_Height (void)
 {
-	Std_ReturnType status;
+	/*write high to move motor in forward mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_HeightMotorCh, STD_HIGH);
 
 }
 
@@ -38,10 +47,10 @@ void IO_HwAbs_ECUSetForward_Height (void Arg_)
  *
  */
 
-void IO_HwAbs_ECUSetForward_Incline (void Arg_)
+void IO_HwAbs_ECUSetForward_Incline (void)
 {
-	Std_ReturnType status;
-
+	/*write high to move motor in forward mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_InclineMotorCh, STD_HIGH);
 }
 
 
@@ -54,9 +63,10 @@ void IO_HwAbs_ECUSetForward_Incline (void Arg_)
  *
  */
 
-void IO_HwAbs_ECUSetForward_Slide (void Arg_)
+void IO_HwAbs_ECUSetForward_Slide (void)
 {
-	Std_ReturnType status;
+	/*write high to move motor in forward mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_SlideMotorCh, STD_HIGH);
 
 }
 
@@ -70,9 +80,10 @@ void IO_HwAbs_ECUSetForward_Slide (void Arg_)
  *
  */
 
-void IO_HwAbs_ECUSetReverse_Height (void Arg_)
+void IO_HwAbs_ECUSetReverse_Height (void)
 {
-	Std_ReturnType status;
+	/*write low to move motor in reverse mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_HeightMotorCh, STD_LOW);
 
 }
 
@@ -86,9 +97,10 @@ void IO_HwAbs_ECUSetReverse_Height (void Arg_)
  *
  */
 
-void IO_HwAbs_ECUSetReverse_Incline (void Arg_)
+void IO_HwAbs_ECUSetReverse_Incline (void)
 {
-	Std_ReturnType status;
+	/*write low to move motor in reverse mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_InclineMotorCh, STD_LOW);
 
 }
 
@@ -102,11 +114,13 @@ void IO_HwAbs_ECUSetReverse_Incline (void Arg_)
  *
  */
 
-void IO_HwAbs_ECUSetReverse_Slide (void Arg_)
+void IO_HwAbs_ECUSetReverse_Slide (void)
 {
-	Std_ReturnType status;
+	/*write low to move motor in reverse mode*/
+	Dio_WriteChannel (DioConfig_DioChannel_SlideMotorCh, STD_LOW);
 
 }
+
 
 
 /**
@@ -119,8 +133,29 @@ void IO_HwAbs_ECUSetReverse_Slide (void Arg_)
  */
 
 void IoHwAbs_ECUGet_Height (IoPositionSensorReadingType* position)
-{
+{	
+	Adc_ValueGroupType IoHwAbs_PositionSensorsReadings[Adc_CR0_NUM_CHANNELS] = 
+	{
+		/*Height*/
+		0,
+		/*Incline*/
+		0,
+		/*Slide*/
+		0
+	};
+
 	Std_ReturnType status;
+	/*read the ADC Channel group*/
+	status = ADC_ReadGroup(AdcConf_AdcGroup_Positon_SensorsGrp, IoHwAbs_PositionSensorsReadings);
+	if (status == E_OK)
+	{
+		position = (IoPositionSensorReadingType) IoHwAbs_PositionSensorsReadings[0];
+	}
+	else
+	{
+		/*handle E_NOT_OK*/
+	}
+
 
 }
 
@@ -136,7 +171,27 @@ void IoHwAbs_ECUGet_Height (IoPositionSensorReadingType* position)
 
 void IoHwAbs_ECUGet_Incline (IoPositionSensorReadingType* position)
 {
+		Adc_ValueGroupType IoHwAbs_PositionSensorsReadings[Adc_CR0_NUM_CHANNELS] = 
+	{
+		/*Height*/
+		0,
+		/*Incline*/
+		0,
+		/*Slide*/
+		0
+	};
+
 	Std_ReturnType status;
+	/*read the ADC Channel group*/
+	status = ADC_ReadGroup(AdcConf_AdcGroup_Positon_SensorsGrp, IoHwAbs_PositionSensorsReadings);
+	if (status == E_OK)
+	{
+		position = (IoPositionSensorReadingType) IoHwAbs_PositionSensorsReadings[1];
+	}
+	else
+	{
+		/*handle E_NOT_OK*/
+	}
 
 }
 
@@ -152,7 +207,27 @@ void IoHwAbs_ECUGet_Incline (IoPositionSensorReadingType* position)
 
 void IoHwAbs_ECUGet_Slide (IoPositionSensorReadingType* position)
 {
+		Adc_ValueGroupType IoHwAbs_PositionSensorsReadings[Adc_CR0_NUM_CHANNELS] = 
+	{
+		/*Height*/
+		0,
+		/*Incline*/
+		0,
+		/*Slide*/
+		0
+	};
+
 	Std_ReturnType status;
+	/*read the ADC Channel group*/
+	status = ADC_ReadGroup(AdcConf_AdcGroup_Positon_SensorsGrp, IoHwAbs_PositionSensorsReadings);
+	if (status == E_OK)
+	{
+		position = (IoPositionSensorReadingType) IoHwAbs_PositionSensorsReadings[2];
+	}
+	else
+	{
+		/*handle E_NOT_OK*/
+	}
 
 }
 
@@ -169,6 +244,16 @@ void IoHwAbs_ECUGet_Slide (IoPositionSensorReadingType* position)
 void IoHwAbs_ECUGet_Weight (IoWeightSensorReadingType* weight)
 {
 	Std_ReturnType status;
+	Spi_DataType spiData;
 
+	status = Spi_ReadIB(SpiConf_SpiChannel_	WeightSensor, &spiData);
+	if (status == E_OK)
+	{
+		weight = (IoWeightSensorReadingType) spiData;
+	}
+	else
+	{
+		/*handle E_NOT_OK*/
+	}
 }
 
