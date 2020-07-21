@@ -172,16 +172,20 @@ void SeatManager_SetHeight (void)
 {
 	Std_ReturnType status;
 	MultiStateBtn HeightBtnState;
-	StepMotorStepType step;
-
 	/* Data Receive Points */
 	status = Rte_Read_rpSeatCtrlBtns_HeightBtnState(&HeightBtnState);
-	
-	/* Server Call Points */
-	status = Rte_Call_rpHeightMotor_Opr_Move(step);
-	
+	if (status == RTE_E_OK)
+	{
+		if (HeightBtnState == MULTI_STATE_BTN_MINUS)
+		{
+			 Rte_Call_rpHeightMotor_Move(MOTOR_STEP_MINUS);
+		}
+		else if (HeightBtnState == MULTI_STATE_BTN_PLUS)
+		{
+			 Rte_Call_rpHeightMotor_Move(MOTOR_STEP_PLUS);
+		}
+	}
 }
-
 
 /**
  *
@@ -196,16 +200,21 @@ void SeatManager_SetIncline (void)
 {
 	Std_ReturnType status;
 	MultiStateBtn InclineBtnState;
-	StepMotorStepType step;
 
 	/* Data Receive Points */
 	status = Rte_Read_rpSeatCtrlBtns_InclineBtnState(&InclineBtnState);
-	
-	/* Server Call Points */
-	status = Rte_Call_rpSlideMotor_Opr_Move(step);
-	
+	if (status == RTE_E_OK)
+	{
+		if (InclineBtnState == MULTI_STATE_BTN_MINUS)
+		{
+			 Rte_Call_rpInclineMotor_Move(MOTOR_STEP_MINUS);
+		}
+		else if (InclineBtnState == MULTI_STATE_BTN_PLUS)
+		{
+			 Rte_Call_rpInclineMotor_Move(MOTOR_STEP_PLUS);
+		}
+	}
 }
-
 
 /**
  *
@@ -220,13 +229,19 @@ void SeatManager_SetSlide (void)
 {
 	Std_ReturnType status;
 	MultiStateBtn SlideBtnState;
-	StepMotorStepType step;
 
 	/* Data Receive Points */
 	status = Rte_Read_rpSeatCtrlBtns_SlideBtnState(&SlideBtnState);
-	
-	/* Server Call Points */
-	status = Rte_Call_rpInclineMotor_Opr_Move(step);
-	
+	if (status == RTE_E_OK)
+	{
+		if (SlideBtnState == MULTI_STATE_BTN_MINUS)
+		{
+			 Rte_Call_rpSlideMotor_Move(MOTOR_STEP_MINUS);
+		}
+		else if (SlideBtnState == MULTI_STATE_BTN_PLUS)
+		{
+			 Rte_Call_rpSlideMotor_Move(MOTOR_STEP_PLUS);
+		}
+	}
 }
 
