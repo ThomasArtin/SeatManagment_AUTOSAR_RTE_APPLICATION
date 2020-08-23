@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AUTOSAR xmlns="http://autosar.org/schema/r4.0">
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 http://autosar.org/schema/r4.0/autosar40/swc/pi">
   <AR-PACKAGES>
     <AR-PACKAGE UUID="accb4de3-5576-45d1-9481-b1d3a9763dd1">
       <SHORT-NAME>BaseTypes</SHORT-NAME>
@@ -106,6 +106,18 @@
         </IMPLEMENTATION-DATA-TYPE>
         <IMPLEMENTATION-DATA-TYPE UUID="b274f57f-cadb-4371-85f4-b696b2b6b402">
           <SHORT-NAME>MultiStateBtn</SHORT-NAME>
+          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+          <TYPE-EMITTER>RTE</TYPE-EMITTER>
+        </IMPLEMENTATION-DATA-TYPE>
+        <IMPLEMENTATION-DATA-TYPE UUID="7523d424-6d98-41fc-9011-5786974cc8c0">
+          <SHORT-NAME>SeatModeBtnType</SHORT-NAME>
           <CATEGORY>TYPE_REFERENCE</CATEGORY>
           <SW-DATA-DEF-PROPS>
             <SW-DATA-DEF-PROPS-VARIANTS>
@@ -279,6 +291,12 @@
       <ELEMENTS>
         <DATA-TYPE-MAPPING-SET UUID="471366b7-39eb-4dd8-80cc-451fd25e3583">
           <SHORT-NAME>MappingSet</SHORT-NAME>
+          <MODE-REQUEST-TYPE-MAPS>
+            <MODE-REQUEST-TYPE-MAP>
+              <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/uint8</IMPLEMENTATION-DATA-TYPE-REF>
+              <MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP">/PortInterfaces/ModeSwitch/SeatCtrlMode</MODE-GROUP-REF>
+            </MODE-REQUEST-TYPE-MAP>
+          </MODE-REQUEST-TYPE-MAPS>
         </DATA-TYPE-MAPPING-SET>
       </ELEMENTS>
     </AR-PACKAGE>
@@ -384,10 +402,47 @@
         </AR-PACKAGE>
         <AR-PACKAGE UUID="f04ee130-4cd1-41cc-bf8b-4cd7c28007d9">
           <SHORT-NAME>ModeSwitch</SHORT-NAME>
+          <ELEMENTS>
+            <MODE-SWITCH-INTERFACE UUID="695b0786-7d4f-4a4d-a2ed-fdfcadc3cfc0">
+              <SHORT-NAME>MsIf_SeatCtrlMode</SHORT-NAME>
+              <IS-SERVICE>false</IS-SERVICE>
+              <MODE-GROUP UUID="28d9c729-0f88-4186-bfef-d1417c00159e">
+                <SHORT-NAME>SeatCtrlMode</SHORT-NAME>
+                <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/PortInterfaces/ModeSwitch/SeatCtrlMode</TYPE-TREF>
+              </MODE-GROUP>
+            </MODE-SWITCH-INTERFACE>
+            <MODE-DECLARATION-GROUP UUID="86cdf9c9-b7a8-4a82-93e5-f987f360a412">
+              <SHORT-NAME>SeatCtrlMode</SHORT-NAME>
+              <CATEGORY>ALPHABETIC_ORDER</CATEGORY>
+              <INITIAL-MODE-REF DEST="MODE-DECLARATION">/PortInterfaces/ModeSwitch/SeatCtrlMode/INIT</INITIAL-MODE-REF>
+              <MODE-DECLARATIONS>
+                <MODE-DECLARATION UUID="17c338fd-4700-48e3-9aa9-3812b6fd110e">
+                  <SHORT-NAME>AUTO</SHORT-NAME>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="d8ea6859-27ed-4071-b1ee-1ac15dc46f4c">
+                  <SHORT-NAME>INIT</SHORT-NAME>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="0090b21e-794d-45ac-b246-cab480231f92">
+                  <SHORT-NAME>MANUAL</SHORT-NAME>
+                </MODE-DECLARATION>
+              </MODE-DECLARATIONS>
+              <ON-TRANSITION-VALUE>255</ON-TRANSITION-VALUE>
+            </MODE-DECLARATION-GROUP>
+          </ELEMENTS>
         </AR-PACKAGE>
         <AR-PACKAGE UUID="d9bfd3c0-efbf-4c2c-998d-f4967c7cdfdc">
           <SHORT-NAME>SenderReceiver</SHORT-NAME>
           <ELEMENTS>
+            <SENDER-RECEIVER-INTERFACE UUID="60ee19e7-c0b6-4fd3-b602-aa6ddda94720">
+              <SHORT-NAME>SrIf_SeatModeBtn</SHORT-NAME>
+              <IS-SERVICE>false</IS-SERVICE>
+              <DATA-ELEMENTS>
+                <VARIABLE-DATA-PROTOTYPE UUID="49271577-2633-46fa-988f-82840b64155e">
+                  <SHORT-NAME>SeatModeBtn</SHORT-NAME>
+                  <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ImplDataTypes/SeatModeBtnType</TYPE-TREF>
+                </VARIABLE-DATA-PROTOTYPE>
+              </DATA-ELEMENTS>
+            </SENDER-RECEIVER-INTERFACE>
             <SENDER-RECEIVER-INTERFACE UUID="5841d9fd-ec91-4640-811d-8be43852d517">
               <SHORT-NAME>Srlf_SeatCtrlBtns</SHORT-NAME>
               <IS-SERVICE>false</IS-SERVICE>
@@ -438,6 +493,10 @@
               <SHORT-NAME>ppSeatCtrlData</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/Srlf_SeatCtrlData</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="327a2d32-9f7e-42d8-9ea2-2e54873ca02f">
+              <SHORT-NAME>ppSeatModeBtn</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/SrIf_SeatModeBtn</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="a189f10b-949b-46b7-af19-86dbd10dabc4">
@@ -457,9 +516,17 @@
               <SHORT-NAME>ppSeatCtrlBtns</SHORT-NAME>
               <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/Srlf_SeatCtrlBtns</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="075c0b63-94ca-4a43-855d-62b8aaa57778">
+              <SHORT-NAME>ppSeatCtrlMode</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/PortInterfaces/ModeSwitch/MsIf_SeatCtrlMode</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
             <R-PORT-PROTOTYPE UUID="98a8cd60-78eb-4efb-bfb3-9c798a642fcc">
               <SHORT-NAME>rpSeatCtrlData</SHORT-NAME>
               <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/Srlf_SeatCtrlData</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="aa8c3eac-e99a-41d6-892d-9e6a8dddb1e2">
+              <SHORT-NAME>rpSeatModeBtn</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/SrIf_SeatModeBtn</REQUIRED-INTERFACE-TREF>
             </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
@@ -469,6 +536,14 @@
                 <DATA-TYPE-MAPPING-REF DEST="DATA-TYPE-MAPPING-SET">/MappingSets/MappingSet</DATA-TYPE-MAPPING-REF>
               </DATA-TYPE-MAPPING-REFS>
               <EVENTS>
+                <DATA-RECEIVED-EVENT UUID="bab13023-71af-4f16-bfbd-a4149247da99">
+                  <SHORT-NAME>DRE_rpSeatModeBtn_SeatModeBtn</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/HMI/Ibhv_HMI/HMI_SeatModeChanged</START-ON-EVENT-REF>
+                  <DATA-IREF>
+                    <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/HMI/rpSeatModeBtn</CONTEXT-R-PORT-REF>
+                    <TARGET-DATA-ELEMENT-REF DEST="VARIABLE-DATA-PROTOTYPE">/PortInterfaces/SenderReceiver/SrIf_SeatModeBtn/SeatModeBtn</TARGET-DATA-ELEMENT-REF>
+                  </DATA-IREF>
+                </DATA-RECEIVED-EVENT>
                 <TIMING-EVENT UUID="6555cb1d-4e37-4fef-b7dd-9076042c73f8">
                   <SHORT-NAME>TE_HMI_MainFunction_100ms</SHORT-NAME>
                   <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/SoftwareComponents/HMI/Ibhv_HMI/HMI_MainFunction</START-ON-EVENT-REF>
@@ -540,6 +615,32 @@
                     </VARIABLE-ACCESS>
                   </DATA-SEND-POINTS>
                   <SYMBOL>HMI_MainFunction</SYMBOL>
+                </RUNNABLE-ENTITY>
+                <RUNNABLE-ENTITY UUID="9ba525e2-37e3-49d5-a9f9-4decd68e1a25">
+                  <SHORT-NAME>HMI_SeatModeChanged</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                    <VARIABLE-ACCESS UUID="74f111e4-c4f7-4c64-bc6f-e002715c562e">
+                      <SHORT-NAME>DRP_rpSeatModeBtn_SeatModeBtn</SHORT-NAME>
+                      <ACCESSED-VARIABLE>
+                        <AUTOSAR-VARIABLE-IREF>
+                          <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/SoftwareComponents/HMI/rpSeatModeBtn</PORT-PROTOTYPE-REF>
+                          <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/PortInterfaces/SenderReceiver/SrIf_SeatModeBtn/SeatModeBtn</TARGET-DATA-PROTOTYPE-REF>
+                        </AUTOSAR-VARIABLE-IREF>
+                      </ACCESSED-VARIABLE>
+                    </VARIABLE-ACCESS>
+                  </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                  <MODE-SWITCH-POINTS>
+                    <MODE-SWITCH-POINT UUID="56037bf1-88f2-482d-ba3c-1e34affcd607">
+                      <SHORT-NAME>MSP_ppSeatCtrlMode_ppSeatCtrlMode</SHORT-NAME>
+                      <MODE-GROUP-IREF>
+                        <CONTEXT-P-PORT-REF DEST="P-PORT-PROTOTYPE">/SoftwareComponents/HMI/ppSeatCtrlMode</CONTEXT-P-PORT-REF>
+                        <TARGET-MODE-GROUP-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/PortInterfaces/ModeSwitch/MsIf_SeatCtrlMode/SeatCtrlMode</TARGET-MODE-GROUP-REF>
+                      </MODE-GROUP-IREF>
+                    </MODE-SWITCH-POINT>
+                  </MODE-SWITCH-POINTS>
+                  <SYMBOL>HMI_SeatModeChanged</SYMBOL>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
               <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>
@@ -1206,6 +1307,10 @@
             <R-PORT-PROTOTYPE UUID="51c70a33-20c6-4eac-9909-0b1fa1d0aeaa">
               <SHORT-NAME>rpSeatCtrlBtns</SHORT-NAME>
               <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/PortInterfaces/SenderReceiver/Srlf_SeatCtrlBtns</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="28483432-59dd-4fce-816e-d5f6fbfd93e2">
+              <SHORT-NAME>rpSeatCtrlMode</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="MODE-SWITCH-INTERFACE">/PortInterfaces/ModeSwitch/MsIf_SeatCtrlMode</REQUIRED-INTERFACE-TREF>
             </R-PORT-PROTOTYPE>
             <R-PORT-PROTOTYPE UUID="4b47f465-fa29-44ef-bee7-b985425aa11d">
               <SHORT-NAME>rpSlideMotor</SHORT-NAME>
